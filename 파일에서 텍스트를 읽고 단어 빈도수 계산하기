@@ -1,0 +1,33 @@
+import string
+
+def clean_text(text):
+    """
+    텍스트에서 구두점 및 불필요한 공백을 제거하고 소문자로 변환하는 함수.
+    """
+    text = text.lower()
+    text = text.translate(str.maketrans("", "", string.punctuation))
+    return text
+
+def word_count(file_path):
+    """
+    파일을 열어 단어 빈도수를 계산하는 함수.
+    """
+    word_frequency = {}
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:
+                cleaned_line = clean_text(line)
+                words = cleaned_line.split()
+                for word in words:
+                    if word in word_frequency:
+                        word_frequency[word] += 1
+                    else:
+                        word_frequency[word] = 1
+    except FileNotFoundError:
+        print("파일을 찾을 수 없습니다.")
+    return word_frequency
+
+# 사용 예시
+file_path = 'sample.txt'  # 파일 경로를 지정하세요.
+word_frequencies = word_count(file_path)
+print(word_frequencies)
