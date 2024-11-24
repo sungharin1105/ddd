@@ -1,0 +1,49 @@
+class Student:
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+
+    def __repr__(self):
+        return f"{self.name}: {self.score}"
+
+class Gradebook:
+    def __init__(self):
+        self.students = []
+
+    def add_student(self, name, score):
+        student = Student(name, score)
+        self.students.append(student)
+
+    def calculate_average(self):
+        if len(self.students) == 0:
+            return 0
+        total_score = sum(student.score for student in self.students)
+        return total_score / len(self.students)
+
+    def sort_students(self):
+        self.students.sort(key=lambda student: student.score, reverse=True)
+
+    def display_students(self):
+        for student in self.students:
+            print(student)
+
+# 사용 예
+gradebook = Gradebook()
+
+# 학생 추가
+gradebook.add_student("홍길동", 85)
+gradebook.add_student("김철수", 92)
+gradebook.add_student("이영희", 78)
+
+# 성적 출력
+print("성적 목록:")
+gradebook.display_students()
+
+# 평균 성적 계산
+average = gradebook.calculate_average()
+print(f"\n평균 성적: {average:.2f}")
+
+# 성적 내림차순 정렬 후 출력
+gradebook.sort_students()
+print("\n성적 내림차순 정렬 후:")
+gradebook.display_students()
