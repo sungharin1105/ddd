@@ -1,0 +1,83 @@
+public class BankAccount {
+    private String accountHolder;
+    private double balance;
+
+    public BankAccount(String accountHolder, double initialBalance) {
+        this.accountHolder = accountHolder;
+        if (initialBalance > 0) {
+            this.balance = initialBalance;
+        } else {
+            System.out.println("초기 잔고는 0보다 커야 합니다.");
+            this.balance = 0;
+        }
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println(amount + "원이 입금되었습니다.");
+        } else {
+            System.out.println("입금 금액은 0보다 커야 합니다.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println(amount + "원이 출금되었습니다.");
+        } else {
+            System.out.println("출금 금액이 부족하거나 잘못되었습니다.");
+        }
+    }
+
+    public void displayBalance() {
+        System.out.println("잔고: " + balance + "원");
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount("홍길동", 1000.0);
+        account.deposit(500.0);
+        account.withdraw(200.0);
+        account.displayBalance();
+    }
+}
+3. 자바스크립트: 웹 페이지에서 입력받은 데이터를 처리하는 폼
+html
+코드 복사
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 입력 예시</title>
+</head>
+<body>
+    <h2>사용자 정보 입력</h2>
+    <form id="userForm">
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+        <label for="age">나이:</label>
+        <input type="number" id="age" name="age" required>
+        <br><br>
+        <button type="submit">제출</button>
+    </form>
+
+    <h3>입력된 데이터:</h3>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // 폼 제출 기본 동작 방지
+
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            
+            if (name && age) {
+                document.getElementById('result').innerHTML = `이름: ${name}, 나이: ${age}`;
+            } else {
+                alert('모든 필드를 채워주세요.');
+            }
+        });
+    </script>
+</body>
